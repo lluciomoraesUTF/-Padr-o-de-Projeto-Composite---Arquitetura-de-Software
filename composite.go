@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-type Funcionario interface {
+type Organizacao interface {
 	CalcularSalarioTotal() float64
 }
 
@@ -19,14 +19,14 @@ func (f *FuncionarioIndividual) CalcularSalarioTotal() float64 {
 
 type Departamento struct {
 	nome         string
-	funcionarios []Funcionario
+	funcionarios []Organizacao
 }
 
-func (d *Departamento) AdicionarFuncionario(f Funcionario) {
+func (d *Departamento) AdicionarFuncionario(f Organizacao) {
 	d.funcionarios = append(d.funcionarios, f)
 }
 
-func (d *Departamento) RemoverFuncionario(f Funcionario) {
+func (d *Departamento) RemoverFuncionario(f Organizacao) {
 	for i, funcionario := range d.funcionarios {
 		if funcionario == f {
 			d.funcionarios = append(d.funcionarios[:i], d.funcionarios[i+1:]...)
@@ -59,14 +59,14 @@ func main() {
 	func1 := &FuncionarioIndividual{"Amanda", 2005}
 	func2 := &FuncionarioIndividual{"Lucio", 2003}
 	func3 := &FuncionarioIndividual{"Tufo", 2024}
-	dptTI := &Departamento{"TI", []Funcionario{}}
+	dptTI := &Departamento{"TI", []Organizacao{}}
 	dptTI.AdicionarFuncionario(func2)
 
-	dptModa := &Departamento{"Moda", []Funcionario{}}
+	dptModa := &Departamento{"Moda", []Organizacao{}}
 	dptModa.AdicionarFuncionario(func1)
 	dptModa.AdicionarFuncionario(func3)
 
-	departamentoPrincipal := &Departamento{"Principal", []Funcionario{}}
+	departamentoPrincipal := &Departamento{"Principal", []Organizacao{}}
 	departamentoPrincipal.AdicionarFuncionario(dptTI)
 	departamentoPrincipal.AdicionarFuncionario(dptModa)
 
